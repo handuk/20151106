@@ -1,0 +1,30 @@
+import time
+from datetime import datetime, timedelta
+import requests
+import json
+
+url = "http://127.0.0.1:4242/api/put"
+
+while 1 :
+        a = 100
+        t = time.localtime()
+        tsec = t.tm_sec
+        if tsec%10!=0 :
+                print tsec
+                time.sleep(0.2)
+
+        else :
+
+                data = {
+                "metric": "cc.bar",
+                "timestamp": time.time(),
+                "value": a,
+                "tags": {
+                        "host": "mypc"
+           }
+                }
+
+                ret= requests.post(url, data=json.dumps(data))
+                print ret
+
+10초마다 100값이들어가게하는거
