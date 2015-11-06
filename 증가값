@@ -1,0 +1,30 @@
+import time
+from datetime import datetime, timedelta
+import requests
+import json
+a = 100
+url = "http://127.0.0.1:4242/api/put"
+
+while 1 :
+
+        t = time.localtime()
+        tsec = t.tm_sec
+        if tsec%10!=0 :
+                print tsec
+                time.sleep(0.8)
+
+        else :
+                data = {
+                "metric": "cd.bar",
+                "timestamp": time.time(),
+                "value": a,
+                "tags": {
+                        "host": "mypc"
+                        }
+ }
+                ret= requests.post(url, data=json.dumps(data))
+                print ret
+                time.sleep(1)
+                a = a+1
+                print a
+                                 
